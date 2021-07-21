@@ -85,33 +85,75 @@
     </div>
 </div>
 
-<!--<div class="container">-->
-<!--    <div class="page-header" id="banner">-->
-<!--        <div class="row">-->
-<!--            <div class="col-lg-8 col-md-7 col-sm-6">-->
-<!--                <h1>Simplex</h1>-->
-<!--                <p class="lead">Mini and minimalist</p>-->
-<!--            </div>-->
-<!--            <div class="col-lg-4 col-md-5 col-sm-6">-->
-<!--                <div class="sponsor">-->
-<!--                    <script async src="https://cdn.carbonads.com/carbon.js?serve=CKYIE23N&placement=bootswatchcom" id="_carbonads_js"></script>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
+
+<div class="container">
 
     <h1>Blog</h1>
 
-    {% for p in object_list %}
-    <h3>{{ p.title }}</h3>
-    <h4>{{ p.created }} by {{ p.author }}</h4>
-    <p>{{ p.content }}</p>
-    {% endfor %}
+    <div class="row">
+        <!-- Blog entries-->
+        <div class="col-lg-8">
+            <!-- Featured blog post-->
 
-    <script src="{% static 'blog/_assets/js/jquery.min.js' %}"></script>
-    <script src="{% static 'blog/bootstrap/bootstrap.bundle.min.js' %}"></script>
-    <script src="{% static 'blog/_assets/js/prism.js' %}" data-manual></script>
-    <script src="{% static 'blog/_assets/js/custom.js' %}"></script>
+            {% for p in object_list %}
+            <div class="card mb-4">
+                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                <div class="card-body">
+                    <div class="small text-muted">{{ p.created }} by {{ p.author }}</div>
+                    <h2 class="card-title">{{ p.title }}</h2>
+                    <p class="card-text"> {{ p.content }} </p>
+                    <a class="btn btn-primary" href="#!">Read more →</a>
+                </div>
+            </div>
+            {% endfor %}
+
+
+        </div>
+
+        <!-- Side widgets-->
+        <div class="col-lg-4">
+            <!-- Search widget-->
+            <div class="card mb-4">
+                <div class="card-header">Search</div>
+                <div class="card-body">
+                    <div class="input-group">
+                        <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
+                        <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Categories widget-->
+            <div class="card mb-4">
+                <div class="card-header">Categories</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <ul class="list-unstyled mb-0">
+                                <li><a href="#!">Web Design</a></li>
+                                <li><a href="#!">HTML</a></li>
+                                <li><a href="#!">Freebies</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6">
+                            <ul class="list-unstyled mb-0">
+                                <li><a href="#!">JavaScript</a></li>
+                                <li><a href="#!">CSS</a></li>
+                                <li><a href="#!">Tutorials</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<script src="{% static 'blog/_assets/js/jquery.min.js' %}"></script>
+<script src="{% static 'blog/bootstrap/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'blog/_assets/js/prism.js' %}" data-manual></script>
+<script src="{% static 'blog/_assets/js/custom.js' %}"></script>
 
 </body>
 </html>
