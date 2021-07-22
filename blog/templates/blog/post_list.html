@@ -97,7 +97,13 @@
 
             {% for p in object_list %}
             <div class="card mb-4">
-                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." /></a>
+
+                {% if p.head_image %}
+                    <img class="card-img-top" src="{{ p.head_image.url }}" alt="Card image cap">
+                {% else %}
+                    <img class="card-img-top" src="https://picsum.photos/850/350/?random" alt="Card image cap">
+                {% endif %}
+
                 <div class="card-body">
                     <div class="small text-muted">{{ p.created }} by {{ p.author }}</div>
                     <h2 class="card-title">{{ p.title }}</h2>
