@@ -14,7 +14,7 @@
 </head>
 <body>
 
-<div class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+<div class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" id="navbar">
     <div class="container">
         <a href="../" class="navbar-brand">Lab. WR </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,23 +95,27 @@
         <div class="col-lg-8">
             <!-- Featured blog post-->
 
-            {% for p in object_list %}
-            <div class="card mb-4">
+            {% if object_list.exists %}
+                {% for p in object_list %}
+                <div class="card mb-4">
 
-                {% if p.head_image %}
-                    <img class="card-img-top" src="{{ p.head_image.url }}" alt="Card image cap">
-                {% else %}
-                    <img class="card-img-top" src="https://picsum.photos/850/350/?random" alt="Card image cap">
-                {% endif %}
+                    {% if p.head_image %}
+                        <img class="card-img-top" src="{{ p.head_image.url }}" alt="Card image cap">
+                    {% else %}
+                        <img class="card-img-top" src="https://picsum.photos/850/350/?random" alt="Card image cap">
+                    {% endif %}
 
-                <div class="card-body">
-                    <div class="small text-muted">{{ p.created }} by {{ p.author }}</div>
-                    <h2 class="card-title">{{ p.title }}</h2>
-                    <p class="card-text"> {{ p.content | truncatewords:50 }} </p>
-                    <a class="btn btn-primary" href="#!">Read more →</a>
+                    <div class="card-body">
+                        <div class="small text-muted">{{ p.created }} by {{ p.author }}</div>
+                        <h2 class="card-title">{{ p.title }}</h2>
+                        <p class="card-text"> {{ p.content | truncatewords:50 }} </p>
+                        <a class="btn btn-primary" href="#!">Read more →</a>
+                    </div>
                 </div>
-            </div>
-            {% endfor %}
+                {% endfor %}
+            {% else %}
+                <h3>아직 게시물이 없습니다.</h3>
+            {% endif %}
 
 
         </div>
