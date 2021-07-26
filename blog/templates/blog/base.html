@@ -112,14 +112,16 @@
                 </div>
             </div>
             <!-- Categories widget-->
-            <div class="card mb-4">
+            <div class="card mb-4" id = "category-card">
                 <div class="card-header">Categories</div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-6">
                             <ul class="list-unstyled mb-0">
-                                <li><a href="#!">Web Design</a></li>
-                                <li><a href="#!">HTML</a></li>
+                                <li><a href="#!">미분류 ({{ posts_without_category }})</a></li>
+                                {% for category in category_list %}
+                                <li><a href="#!">{{ category.name }} ({{ category.post_set.count }})</a></li>
+                                {% endfor %}
                                 <li><a href="#!">Freebies</a></li>
                             </ul>
                         </div>
