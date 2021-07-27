@@ -9,8 +9,25 @@
     <header class="mb-4">
         <!-- Post title-->
         <h1 class="fw-bolder mb-1">{{ object.title }}</h1>
+
+        {% if object.category %}
+            <span class="badge bg-primary" style="float: right;">{{ object.category }}</span>
+        {% else %}
+            <span class="badge bg-primary" style="float: right;">미분류</span>
+        {% endif %}
+
+        <p class="lead">
+            by
+            <a href="#">{{ object.author.username }}</a>
+        </p>
+        {% if request.user == object.author %}
+            <button type="button" class="btn btn-sm btn-outline-secondary" style="float: right;" onclick="location.href='{{ object.get_update_url }}'">EDIT</button>
+        {% endif %}
+
+
         <!-- Post meta content-->
-        <div class="text-muted fst-italic mb-2">Posted on {{ object.created }} by {{ object.author.username }}</div>
+        <div class="text-muted fst-italic mb-2">Posted on {{ object.created }}</div>
+        <hr>
         <!-- Post categories-->
         <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>
         <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
