@@ -68,7 +68,11 @@
                     <div class="flex-shrink-0">
                         <img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
                     <div class="ms-3">
-                        <div class="fw-bold">{{ comment.author }}</div>
+                        {% if comment.author == request.user %}
+                        <button class="btn btn-sm btn-info" >edit</button>
+                        <button class="btn btn-sm btn-warning" >delete</button>
+                        {% endif %}
+                        <div class="fw-bold">{{ comment.author }} <small class="text_muted">{{ comment.created_at }}</small></div>
                         {{ comment.get_markdown_content | safe }}
                     </div>
                 </div>
