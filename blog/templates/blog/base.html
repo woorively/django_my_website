@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{% static 'blog/_assets/css/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'blog/_assets/css/prism-okaidia.css' %}">
     <link rel="stylesheet" href="{% static 'blog/_assets/css/custom.min.css' %}">
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
 <body>
 
@@ -74,13 +74,47 @@
                 </li>
             </ul>
             <ul class="navbar-nav ms-md-auto">
-                <li class="nav-item">
-                    <a target="_blank" rel="noopener" class="nav-link" href="https://github.com/thomaspark/bootswatch/"><i class="fa fa-github"></i> GitHub</a>
-                </li>
-                <li class="nav-item">
-                    <a target="_blank" rel="noopener" class="nav-link" href="https://twitter.com/bootswatch"><i class="fa fa-twitter"></i> Twitter</a>
-                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="download">{{ user }} <span class="caret"></span></a>
+                        <div class="dropdown-menu" aria-labelledby="download">
+    <!--                        <a class="dropdown-item" rel="noopener" target="_blank" href="https://jsfiddle.net/bootswatch/1uvdsae4/">Open in JSFiddle</a>-->
+    <!--                        <div class="dropdown-divider"></div>-->
+    <!--                        <a class="dropdown-item" href="../5/simplex/bootstrap.min.css" download>bootstrap.min.css</a>-->
+    <!--                        <a class="dropdown-item" href="../5/simplex/bootstrap.css" download>bootstrap.css</a>-->
+    <!--                        <div class="dropdown-divider"></div>-->
+    <!--                        <a class="dropdown-item" href="../5/simplex/_variables.scss" download>_variables.scss</a>-->
+                            <a class="dropdown-item" href="/accounts/logout/">Log Out</a>
+                        </div>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
+                            Log In
+                        </button>
+                    </li>
+                {% endif %}
             </ul>
+        </div>
+    </div>
+</div>
+
+{% load socialaccount %}
+
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Please Log In</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <a role="button" class="btn btn-primary" href="{% provider_login_url 'google' %}"><i class="fab fa-google"></i>Log in with google</a>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
         </div>
     </div>
 </div>
