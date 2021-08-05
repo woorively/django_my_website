@@ -69,7 +69,7 @@
                         <img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
                     <div class="ms-3">
                         {% if comment.author == request.user %}
-                        <button class="btn btn-sm btn-info" >edit</button>
+                        <button class="btn btn-sm btn-info" onclick="location.href='/blog/edit_comment/{{ comment.pk }}/'">edit</button>
                         <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#deleteCommentModal-{{ comment.pk }}">delete</button>
                         {% endif %}
                         <div class="fw-bold">{{ comment.author }} <small class="text_muted">{{ comment.created_at }}</small></div>
