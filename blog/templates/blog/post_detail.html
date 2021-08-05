@@ -66,7 +66,11 @@
                 {% for comment in object.comment_set.all %}
                 <div class="d-flex" id="comment-id-{{ comment.pk }}">
                     <div class="flex-shrink-0">
-                        <img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                        {% if comment.author.socialaccount_set.all.0.get_avatar_url %}
+                            <img width="50px" class="rounded-circle" src="{{ comment.author.socialaccount_set.all.0.get_avatar_url }}" alt="..." /></div>
+                        {% else %}<!-- 아래,, 페이지가 안 뜸 ㅠㅠ 살짝보류..-->
+                            <img width="50px" class="rounded-circle" src="https://api.adorable.io/avatars/285/{{ comment.author }}.png" alt="..." /></div>
+                        {% endif %}
                     <div class="ms-3">
                         {% if comment.author == request.user %}
                         <button class="btn btn-sm btn-info" onclick="location.href='/blog/edit_comment/{{ comment.pk }}/'">edit</button>
