@@ -70,7 +70,7 @@
                     <div class="ms-3">
                         {% if comment.author == request.user %}
                         <button class="btn btn-sm btn-info" >edit</button>
-                        <button class="btn btn-sm btn-warning" >delete</button>
+                        <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#deleteCommentModal-{{ comment.pk }}">delete</button>
                         {% endif %}
                         <div class="fw-bold">{{ comment.author }} <small class="text_muted">{{ comment.created_at }}</small></div>
                         {{ comment.get_markdown_content | safe }}
@@ -78,6 +78,29 @@
                 </div>
                 {% endfor %}
             </div>
+
+
+            {% for comment in object.comment_set.all %}
+                {% if user == comment.author %}
+                    <div class="modal fade" id="deleteCommentModal-{{ comment.pk }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">정말로 삭제하시겠습니까?</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>{{ comment.get_markdown_content | safe }}</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" onclick="location.href='/blog/delete_comment/{{ comment.pk }}/'">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
 
         </div>
     </div>
