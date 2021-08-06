@@ -145,8 +145,8 @@
                 <div class="card-header">Search</div>
                 <div class="card-body">
                     <div class="input-group">
-                        <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
-                        <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+                        <input class="form-control" onkeyup="wait_for_enterkey()" type="text" id="search-input" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
+                        <button class="btn btn-primary" id="button-search" type="button" onclick="search_post();">Go!</button>
                     </div>
                 </div>
             </div>
@@ -172,6 +172,19 @@
 
 
 </div>
+
+<script>
+    function search_post(){
+        var search_value = document.getElementById('search-input').value;
+        location.href="/blog/search/" + search_value + "/";
+    }
+
+    function wait_for_enterkey(){
+        if (window.event.keyCode == 13){
+            search_post();
+        }
+    }
+</script>
 
 <script src="{% static 'blog/_assets/js/jquery.min.js' %}"></script>
 <script src="{% static 'blog/bootstrap/bootstrap.bundle.min.js' %}"></script>
